@@ -13,8 +13,12 @@ struct point
     string lon;
     string ele;
     string date;
-
+    /*
+    All elemtes of the struct are declared to be strings as i wont be doing any math simply moving them to a .csv and excel will recognize them
+    as numbers. Also I first tried this with all the data as doubles and was haing rounding issues.
+    */
     point(){}
+    // default constructor
     point( string Id, string trksegId, string Lat, string Lon, string Ele, string Date)
     {
     id = Id;
@@ -23,8 +27,8 @@ struct point
     lon = Lon;
     ele = Ele;
     date= Date;
-
     }
+    // the constructor i actually use
 
 };
 
@@ -43,8 +47,28 @@ void reader(string filename, vector <point> &data)
     {
         getline(datafile, line);
     }
-    getline(datafile, line);
-    cout<< line<< endl;
+    // clearing the first lines that are all irelevant for my implemetation.
+    string one;
+    string two;
+    string three;
+    string four;
+    string five;
+    string six;
+    while(getline(datafile, line))
+    {
+        stringstream ss(line, '\t');
+        ss>>one;
+        ss>>two;
+        ss>>three;
+        ss>>four;
+        ss>>five;
+        ss>>six;
+        point a =point(one, two, three, four, five, six);
+        data.push_back(a);
+    }
+    //cout<< data.size()<< " should equal 807 something"<< endl;
+    // was checking to see that it pulled out all data
+    
 }
 /*
 void printer()
