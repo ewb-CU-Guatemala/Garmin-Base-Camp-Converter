@@ -68,21 +68,29 @@ void reader(string filename, vector <point> &data)
     }
     //cout<< data.size()<< " should equal 807 something"<< endl;
     // was checking to see that it pulled out all data
-    
+    datafile.close();
 }
-/*
-void printer()
+void output(vector <point> &data)
 {
-
+    ofstream datafile;
+    datafile.open("output.csv");
+    datafile << "ID, trksegID, lat, lon, ele, date" << endl;
+    for(int i=0; i<data.size() ; i++)
+    {
+        cout<< i<< endl;
+        point a= data.at(i);
+        datafile<< a.id<< ','<< a.trksegid <<','<< a.lat << ','<<a.lon <<','<< a.ele<<','<< a.date<< endl;
+    }
 }
-i*/
 int main(int argc, char *argv[])
 {
     if(argc !=2)
     {
         cout<< "please enter the filename of the txt file you would like to read from"<< endl;
+        return 0;
     }
     vector <point> data;
     reader(argv[1], data);
+    output(data);
 
 }
